@@ -34,5 +34,5 @@ jobs:
             owner: '${{ github.REPOSITORY_OWNER }}',
             repo: '${{ github.event.repository.name }}',
             issue_number: ${{ github.event.issue.number }},
-            assignees: 'joshjohanning, mickeygousset'
+            assignees: '["joshjohanning"]'
           })
