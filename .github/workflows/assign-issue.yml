@@ -25,7 +25,7 @@ jobs:
       env: 
         GH_TOKEN: ${{ github.token }}
       run: |
-        gh issue edit ${{ github.event.issue.number }} --add-assignee 'joshjohanning' -R ${{ github.REPOSITORY_OWNER }}/${{ github.event.repository.name }}
+        gh issue edit ${{ github.event.issue.number }} --add-assignee 'joshjohanning' -R ${{ github.repository }}
 
     - name: Assign Issue # doesn't work
       uses: actions/github-script@v6
