@@ -25,10 +25,9 @@ jobs:
       env: 
         GH_TOKEN: ${{ github.token }}
       run: |
-        # gh issue edit ${{ github.event.issue.number }} --add-assignee 'joshjohanning' -R ${{ github.repository }}
-        echo "test"
+        gh issue edit ${{ github.event.issue.number }} --add-assignee 'joshjohanning' -R ${{ github.repository }}
 
-    - name: Assign Issue # doesn't work
+    - name: Assign Issue
       uses: actions/github-script@v6
       with:
         debug: true
