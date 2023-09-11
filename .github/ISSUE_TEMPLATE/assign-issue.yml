@@ -1,0 +1,22 @@
+name: Create Issue and Assign
+description: Create a issue and assign to users with IssueOps
+title: "Assign Issue to: <name>"
+labels: ["assign-issue"]
+body:
+  - type: textarea
+    attributes:
+      label: Food
+      description: Enter in the name of your favorite food
+      placeholder: <enter-food-name-here>
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Color
+      description: Please select the color you like best
+      options:
+        - blue
+        - red
+        - green
+    validations:
+      required: true
