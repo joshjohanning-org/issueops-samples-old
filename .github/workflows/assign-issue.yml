@@ -9,7 +9,7 @@ jobs:
       (github.event.action == 'opened') &&
       contains(github.event.issue.labels.*.name, 'assign-issue')
     permissions:
-      contents: read
+      contents: write
       issues: write
 
     steps:
@@ -26,12 +26,10 @@ jobs:
         GH_TOKEN: ${{ github.token }}
       run: |
 
-    - name: Post failure message
+    - name: Assign Issue
       uses: actions/github-script@v6
       with:
         script: |
-          let commentBody
-          commentBody = `😢 The issue body could not be parsed, @${{ github.actor }}. Please open a new issue using the issue template and ensure your formatting and line spacing remains untouched.`
           await github.rest.issues.addAssignees({
             owner: '${{ github.REPOSITORY_OWNER }}',
             repo: '${{ github.event.repository.name }}',
