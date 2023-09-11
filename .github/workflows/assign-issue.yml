@@ -25,7 +25,7 @@ jobs:
       env: 
         GH_TOKEN: ${{ github.token }}
       run: |
-        gh issue edit ${{ github.event.issue.number }} --add-assignee 'joshjohanning' -R ${{ github.repository }}
+        gh issue edit ${{ github.event.issue.number }} --add-assignee '${{ github.event.issue.user.login }}' -R ${{ github.repository }}
 
     - name: Assign Issue
       uses: actions/github-script@v6
@@ -36,5 +36,29 @@ jobs:
             owner: '${{ github.REPOSITORY_OWNER }}',
             repo: '${{ github.event.repository.name }}',
             issue_number: ${{ github.event.issue.number }},
-            assignees: 'joshjohanning'
+            assignees: '${{ github.event.issue.user.login }}'
           })
+
+    - name: post comment
+      uses: actions/github-script@v6
+      with:
+        script: |
+          let commentBody
+          commentBody = `🚀 Thank you for the issue, @${{ github.actor }}!`
+          await github.rest.issues.createComment({
+            issue_number: ${{ github.event.issue.number }},
+            owner: '${{ github.REPOSITORY_OWNER }}',
+            repo: '${{ github.event.repository.name }}',
+            body: commentBody.replace(/  +/g, '')
+          })
+
+    - name: close issue
+      uses: actions/github-script@v6
+      with:
+        script: |
+            await github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed',
+            });
