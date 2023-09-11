@@ -30,10 +30,11 @@ jobs:
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.ADMIN_TOKEN }}
+        debug: true
         script: |
           await github.rest.issues.addAssignees({
             owner: '${{ github.REPOSITORY_OWNER }}',
             repo: '${{ github.event.repository.name }}',
             issue_number: ${{ github.event.issue.number }},
-            assignees: '[joshjohanning]'
+            assignees: '["joshjohanning"]'
           })
