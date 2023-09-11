@@ -6,7 +6,7 @@ jobs:
   assign-issue:
     runs-on: ubuntu-latest
     if: github.event_name == 'issues' &&
-      (github.event.action == 'opened' &&
+      (github.event.action == 'opened') &&
       contains(github.event.issue.labels.*.name, 'assign-issue')
     permissions:
       contents: read
