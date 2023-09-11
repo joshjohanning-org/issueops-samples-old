@@ -21,12 +21,14 @@ jobs:
     - uses: stefanbuck/github-issue-parser@v3
       id: issue-parser
 
-    - name: create repo
+    - name: assign issue
       env: 
         GH_TOKEN: ${{ github.token }}
       run: |
+        gh issue edit 8 --add-assignee 'joshjohanning' -R ${{ github.REPOSITORY_OWNER }}/${{ github.event.repository.name }
 
     - name: Assign Issue
+      if: false()
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.ADMIN_TOKEN }}
